@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+db/app.db
+
+# production
+/build 
+
+# typescript 
+*.tsbuildinfo
+
+#Vscode
+.vscode
