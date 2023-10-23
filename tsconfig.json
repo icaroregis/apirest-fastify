@@ -25,7 +25,7 @@
       "@ui/*": ["./src/ui/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/.eslintrc.js", "db/migrations/**/*.ts"],
+  "include": ["src/**/*.ts", "db/migrations/**/*.ts"],
   "exclude": ["node_modules"],
   "files": ["knexfile.ts"]
 }

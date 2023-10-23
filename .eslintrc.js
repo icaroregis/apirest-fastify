@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   parser: '@typescript-eslint/parser',
   env: {
     browser: true,
@@ -36,7 +36,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  ignorePatterns: ['node_modules/', '_explicacoes/'],
+  ignorePatterns: ['node_modules/'],
   rules: {
     'no-console': 'error',
     quotes: ['error', 'single'],
