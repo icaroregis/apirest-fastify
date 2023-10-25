@@ -1,13 +1,8 @@
-# dependencies
 /node_modules
 db/app.db
 .env
-
-# production
 /build 
-
-# typescript 
-*.tsbuildinfo
-
-#Vscode
+*.tsbuildinfo 
 .vscode
+_explicacoes
+
