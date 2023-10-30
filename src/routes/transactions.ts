@@ -4,8 +4,18 @@ import { FastifyInstance } from 'fastify';
 import crypto, { randomUUID } from 'node:crypto';
 import { checkSessionIdExists } from '@/middlewares/checkSessionIdExists';
 
+// * Tipos de teste
+// * Unitários: Unidade da sua aplicação. Ex: uma função.
+// * Integração: Comunicação entre duas ou mais unidades. Ex. Uma função que chama outra função.
+// * e2e - ponta a ponta: Simulam um usuário operando na nossa aplicação.
+
+// ? e2e => front-end: Abre a página de login, digite o texto: icaroregisalmeida@gmail.com no campo com id email, clique no botão.
+// ? back-end: Chamadas HTTP, websocket
+
+// ! Pirâmide de testes: E2E(Não dependem de nenhuma tecnologia, não dependem de arquitetura).
+
 //Cookies <--> Formas da gente manter contexto entre as requisições.
-//todo plugin precisa ser uma função assíncrona.
+// todo plugin precisa ser uma função assíncrona.
 export async function transactionsRoutes(app: FastifyInstance) {
   // middleware global
   // app.addHook('preHandler', async (request, reply) => {
