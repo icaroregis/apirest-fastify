@@ -1,31 +1,51 @@
 import { z } from 'zod';
-import crypto, { randomUUID } from 'node:crypto';
 import { knex } from '../database';
 import { FastifyInstance } from 'fastify';
+import crypto, { randomUUID } from 'node:crypto';
+import { checkSessionIdExists } from '@/middlewares/checkSessionIdExists';
 
 //Cookies <--> Formas da gente manter contexto entre as requisições.
 //todo plugin precisa ser uma função assíncrona.
 export async function transactionsRoutes(app: FastifyInstance) {
-  app.get('/', async () => {
-    const transactions = await knex('transactions').select();
+  // middleware global
+  // app.addHook('preHandler', async (request, reply) => {
+  //   console.log('testando middleware global');
+  // });
+
+  /** preHandler => executar algo antes de executar a função dentro deste bloco. Em outras palavras um Middleware. */
+  app.get('/', { preHandler: [checkSessionIdExists] }, async request => {
+    const { sessionId } = request.cookies;
+    const transactions = await knex('transactions').where('session_id', sessionId).select();
     return { transactions };
   });
 
-  app.get('/:id', async request => {
+  app.get('/:id', { preHandler: [checkSessionIdExists] }, async request => {
     const getTransactionParamsSchema = z.object({
       id: z.string().uuid(),
     });
 
     const { id } = getTransactionParamsSchema.parse(request.params);
+    const { sessionId } = request.cookies;
 
     /** o uso do first é para dizer para o knex que queremos apenas um resultado, senão ele retornaria um array. */
-    const transaction = await knex('transactions').where('id', id).first();
+    const transaction = await knex('transactions')
+      .where({
+        session_id: sessionId,
+        id: id,
+      })
+      .first();
 
     return { transaction };
   });
 
-  app.get('/summary', async () => {
-    const summary = await knex('transactions').sum('amount', { as: 'amount' }).first();
+  app.get('/summary', { preHandler: [checkSessionIdExists] }, async request => {
+    const { sessionId } = request.cookies;
+
+    const summary = await knex('transactions')
+      .where('session_id', sessionId)
+      .sum('amount', { as: 'amount' })
+      .first();
+
     return { summary };
   });
 
