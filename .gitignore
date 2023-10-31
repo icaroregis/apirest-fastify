@@ -1,8 +1,8 @@
 /node_modules
 db/app.db
-.env
+.env 
+.env.test
 /build 
 *.tsbuildinfo 
 .vscode
-_explicacoes
 
