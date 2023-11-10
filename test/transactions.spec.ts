@@ -1,7 +1,7 @@
 import { test, beforeAll, afterAll, describe, expect, beforeEach } from 'vitest';
 import { execSync } from 'node:child_process';
-import request from 'supertest';
 import { app } from '../src/app';
+import request from 'supertest';
 
 // * Os testes são compostos de tres partes:
 // * O título.

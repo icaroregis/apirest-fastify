@@ -5,4 +5,5 @@ db/app.db
 /build 
 *.tsbuildinfo 
 .vscode
+.dist
 
