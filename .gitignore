@@ -3,7 +3,7 @@ db/app.db
 .env 
 .env.test
 /build 
+/dist
 *.tsbuildinfo 
-.vscode
-.dist
+.vscode 
 
